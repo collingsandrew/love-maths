@@ -15,6 +15,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    // allows the user to click enter to submit answer instead of clicking on the submit answer button
+    document.getElementById('answer-box').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            checkAnswer();
+        }
+    })
+
     runGame('addition');
 });
 
@@ -23,6 +30,12 @@ document.addEventListener("DOMContentLoaded", function() {
  * and after the users answer has been processed 
  */
 function runGame(gameType) {
+
+    // clears the answer box on reload
+    document.getElementById('answer-box').value = "";
+    // on load the answer box is auto selected
+    document.getElementById('answer-box').focus();
+
     // creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
@@ -106,9 +119,9 @@ function displayAdditionQuestion(operand1, operand2) {
 }
 
 function displaySubtractQuestion(operand1, operand2) {
-    // this dictates whether operand1 is bigger than operand 2, and if not then operand 1 should display as operand 2
+    // this dictates whether operand1 is bigger than operand 2, and if not then operand 1 should display as operand 2 - (ternary operator)
     document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
-    // this dictates whether operand1 is bigger than operand 2, and if not then operand 2 should display as operand 1
+    // this dictates whether operand1 is bigger than operand 2, and if not then operand 2 should display as operand 1 - (ternary operator)
     document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = '-';
 }
